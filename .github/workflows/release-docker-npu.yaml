@@ -24,19 +24,6 @@ jobs:
       - name: Setup Docker buildx
         uses: docker/setup-buildx-action@v3
 
-      - name: Docker meta
-        id: meta
-        uses: docker/metadata-action@v5
-        with:
-          images: |
-            lmsysorg/sglang:
-          tags: |
-            type=ref,event=branch
-            type=ref,event=pr
-            type=pep440,pattern={{raw}}
-          flavor:
-            latest=false
-
       # Login against a Docker registry except on PR
       # https://github.com/docker/login-action
       - name: Login to Docker Hub

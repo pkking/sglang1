@@ -32,9 +32,9 @@ jobs:
           images: |
             quay.io/ascend/sglang
           tags: |
-            type=ref,event=branch,suffix=-a3
-            type=ref,event=pr,suffix=-a3
-            type=pep440,pattern={{raw}},suffix=-a3
+            type=ref,event=branch
+            type=ref,event=pr
+            type=pep440,pattern={{raw}}
           flavor:
             latest=false
 
