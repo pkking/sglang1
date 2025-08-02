@@ -51,5 +51,5 @@ jobs:
           # TODO: need made the tag build by matrix
           tag=v${version}-cann8.2.rc1.alpha003-ubuntu22.04-py3.11
 
-          docker build . -f docker/Dockerfile.npu  -t lmsysorg/sglang:${tag} --no-cache
-          docker push lmsysorg/sglang:${tag}
+          docker build . -f docker/Dockerfile.npu --build-arg SGLANG_KERNEL_NPU_TAG=20250802  -t lmsysorg/sglang:${tag} --no-cache
+          docker push ${{ github.repository_owner }}/sglang:${tag}

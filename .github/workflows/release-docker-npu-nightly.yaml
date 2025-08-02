@@ -1,14 +1,11 @@
 name: Release Docker Images Nightly (Ascend NPU)
 on:
-  pull_request:
-    branches: 
-      - main
   workflow_dispatch:
   schedule:
     - cron: '0 0 * * *'
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.event.number || github.sha }}
+  group: ${{ github.workflow }}-${{ github.sha }}
   cancel-in-progress: true
 
 jobs:
@@ -48,7 +45,7 @@ jobs:
         uses: docker/login-action@v3
         with:
           registry: quay.io
-          username: ${{ vars.QUAY_USERNAME }}
+          username: ${{ secrets.QUAY_USERNAME }}
           password: ${{ secrets.QUAY_PASSWORD }}
 
       # Build and push Docker image with Buildx (don't push on PR)
@@ -63,5 +60,5 @@ jobs:
           platforms: linux/arm64
           labels: ${{ steps.meta.outputs.labels }}
           tags: ${{ steps.meta.outputs.tags }}
-          push: ${{ github.event_name == 'push' && github.repository_owner == 'sgl-project' }}
+          push: true
           provenance: false
