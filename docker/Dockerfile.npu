@@ -73,10 +73,11 @@ RUN python3 -m pip install --no-cache-dir \
     pybind11
 
 # Install Deep-ep
-
 RUN git clone  --branch $SGLANG_KERNEL_NPU_TAG https://github.com/sgl-project/sgl-kernel-npu.git
-ENV LD_LIBRARY_PATH=${ASCEND_CANN_PATH}/latest/runtime/lib64/stub:$LD_LIBRARY_PATH
-RUN source ${ASCEND_CANN_PATH}/set_env.sh && cd sgl-kernel-npu && bash build.sh
+RUN export LD_LIBRARY_PATH=${ASCEND_CANN_PATH}/latest/runtime/lib64/stub:$LD_LIBRARY_PATH && \
+    source ${ASCEND_CANN_PATH}/set_env.sh && \
+    cd sgl-kernel-npu && \
+    bash build.sh
 RUN pip install sgl-kernel-npu/output/deep_ep*.whl --no-cache-dir
 RUN cd "$(pip show deep-ep | awk '/^Location:/ {print $2}')" && ln -s deep_ep/deep_ep_cpp*.so
 
