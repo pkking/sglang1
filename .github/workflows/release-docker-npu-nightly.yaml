@@ -37,8 +37,8 @@ jobs:
           images: |
             ${{ github.repository_owner }}/sglang
           tags: |
-            type=raw,value=$repo.default_branch-{{ date 'YYYYMMDD' tz='Asia/Shanghai' }}
-            type=schedule,pattern=$repo.default_branch-{{ date 'YYYYMMDD' tz='Asia/Shanghai' }}
+            type=raw,value=main-{{ date 'YYYYMMDD' tz='Asia/Shanghai' }}
+            type=schedule,pattern=main-{{ date 'YYYYMMDD' tz='Asia/Shanghai' }}
           flavor: |
             suffix=-cann${{ matrix.cann_version }}-${{ matrix.device_type }}-${{ matrix.os }}-${{ matrix.python_version }},onlatest=true
       # Login against a Docker registry except on PR
