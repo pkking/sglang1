@@ -40,7 +40,7 @@ jobs:
             type=raw,value=$repo.default_branch-{{ date 'YYYYMMDD' tz='Asia/Shanghai' }}
             type=schedule,pattern=$repo.default_branch-{{ date 'YYYYMMDD' tz='Asia/Shanghai' }}
           flavor: |
-            suffix: -cann${{ matrix.cann_version }}-${{ matrix.device_type }}-${{ matrix.os }}-${{ matrix.python_version }},onlatest=true
+            suffix=-cann${{ matrix.cann_version }}-${{ matrix.device_type }}-${{ matrix.os }}-${{ matrix.python_version }},onlatest=true
       # Login against a Docker registry except on PR
       # https://github.com/docker/login-action
       - name: Log into docker hub

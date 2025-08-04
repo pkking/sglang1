@@ -32,9 +32,9 @@ jobs:
           images: |
             ${{ github.repository_owner }}/sglang
           tags: |
-            type=pep440,event={{raw}}
+            type=pep440,pattern={{raw}}
           flavor: |
-            suffix: -cann${{ matrix.cann_version }}-${{ matrix.device_type }}-${{ matrix.os }}-${{ matrix.python_version }},onlatest=true
+            suffix=-cann${{ matrix.cann_version }}-${{ matrix.device_type }}-${{ matrix.os }}-${{ matrix.python_version }},onlatest=true
       - name: Setup Docker buildx
         uses: docker/setup-buildx-action@v3
 
