@@ -1,3 +1,10 @@
+ARG CANN_VERSION=8.2.rc1.alpha003
+ARG DEVICE_TYPE=a3
+ARG OS=ubuntu22.04
+ARG PYTHON_VERSION=py3.11
+
+FROM quay.io/ascend/cann:$CANN_VERSION-$DEVICE_TYPE-$OS-$PYTHON_VERSION
+
 # Update pip & apt sources
 ARG PIP_INDEX_URL="https://pypi.org/simple/"
 ARG APTMIRROR=""
@@ -9,12 +16,6 @@ ARG TRITON_ASCEND_URL=https://sglang-ascend.obs.cn-east-3.myhuaweicloud.com/sgla
 ARG SGLANG_TAG=main
 ARG ASCEND_CANN_PATH=/usr/local/Ascend/ascend-toolkit
 ARG SGLANG_KERNEL_NPU_TAG=main
-ARG CANN_VERSION=8.2.rc1.alpha003
-ARG DEVICE_TYPE=a3
-ARG OS=ubuntu22.04
-ARG PYTHON_VERSION=py3.11
-
-FROM quay.io/ascend/cann:$CANN_VERSION-$DEVICE_TYPE-$OS-$PYTHON_VERSION
 
 WORKDIR /workspace
 
