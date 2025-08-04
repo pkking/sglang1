@@ -46,6 +46,12 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+      - name: Get version
+        id: get_version
+        run: |
+          version=$(cat python/sglang/version.py | cut -d'"' -f2)
+          echo "TAG=v$version-cann${{ matrix.cann_version }}-${{ matrix.device_type }}-${{ matrix.os }}-${{ matrix.python_version }}" >> $GITHUB_OUTPUT
+
       - name: Build and push Docker image
         id: build-and-push
         uses: docker/build-push-action@v6
@@ -55,7 +61,7 @@ jobs:
           # TODO: need add x86 platforms support when memfabric is ready
           platforms: linux/arm64
           labels: ${{ steps.meta.outputs.labels }}
-          tags: ${{ steps.meta.outputs.tags }}
+          tags: ${{ steps.meta.outputs.tags || steps.get_version.outputs.TAG }}
           push: true
           provenance: false
           build-args: |
